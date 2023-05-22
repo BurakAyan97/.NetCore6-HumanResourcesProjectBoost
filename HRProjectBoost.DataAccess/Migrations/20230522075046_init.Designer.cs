@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRProjectBoost.DataAccess.Migrations
 {
     [DbContext(typeof(HRProjectContext))]
-    [Migration("20230521192249_initial")]
-    partial class initial
+    [Migration("20230522075046_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,21 +57,21 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "83f11bc2-b5cf-4c66-b1d3-7d725b7e3fe9",
+                            ConcurrencyStamp = "71f14845-0106-4dbd-8b74-cf92ff28759d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d8cf10f9-8750-422a-b706-e6efc2b236b8",
+                            ConcurrencyStamp = "4ba36e68-5b64-4c13-bbb2-f7adadfb20c3",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "a14161ce-d45a-44b2-acf0-f5780c033d73",
+                            ConcurrencyStamp = "1a9af3b7-81af-439f-b10e-17699ce52671",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         });
@@ -210,29 +210,29 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Admin",
-                            BirthDate = new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1843),
+                            BirthDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5621),
                             CompanyInfo = "Admin",
-                            ConcurrencyStamp = "2ba6a8f6-9c1e-4caa-b3bc-77493d82a2f8",
+                            ConcurrencyStamp = "93f68e2b-f225-4a6d-8db6-a16c6766f8b5",
                             Department = 2,
                             Email = "admin.admin@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1857),
+                            EndDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5629),
                             IdentityNumber = "12345678998",
                             Job = "Admin",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             Name = "Admin",
-                            NormalizedEmail = "ADMIN.ADMIN@BILGEADAMBOOST.COM",
-                            NormalizedUserName = "ADMIN",
+                            NormalizedEmail = "ADMİN.ADMİN@BİLGEADAMBOOST.COM",
+                            NormalizedUserName = "ADMİN",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAENB9hvmSXZ6iCzkXFzcY1iWO+fDRO3ihhVJ+qQHObPuuSq/kLMJHLL0WWBKjSJ12Fg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDaXsUYI7mDC4OJ5z4BMwUfOTefsH6vHNyonvTLB/J9gZL/08Jbtn3v99MVlXDWK6A==",
                             PhoneNumber = "12345678901",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "Admin",
                             SecondName = "Admin",
-                            SecurityStamp = "337e202f-55b1-4ef6-a835-711578af66c0",
-                            StartDate = new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1857),
+                            SecurityStamp = "b38ad386-11a4-4c6a-80f7-cc2355a8c8d2",
+                            StartDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5628),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Admin"

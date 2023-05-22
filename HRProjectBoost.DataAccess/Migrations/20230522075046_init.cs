@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRProjectBoost.DataAccess.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,15 +178,15 @@ namespace HRProjectBoost.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "83f11bc2-b5cf-4c66-b1d3-7d725b7e3fe9", "Admin", "ADMIN" },
-                    { 2, "d8cf10f9-8750-422a-b706-e6efc2b236b8", "Manager", "MANAGER" },
-                    { 3, "a14161ce-d45a-44b2-acf0-f5780c033d73", "Personnel", "PERSONNEL" }
+                    { 1, "71f14845-0106-4dbd-8b74-cf92ff28759d", "Admin", "ADMIN" },
+                    { 2, "4ba36e68-5b64-4c13-bbb2-f7adadfb20c3", "Manager", "MANAGER" },
+                    { 3, "1a9af3b7-81af-439f-b10e-17699ce52671", "Personnel", "PERSONNEL" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthCity", "BirthDate", "CompanyInfo", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "EndDate", "IdentityNumber", "Job", "LastName", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "Salary", "SecondLastName", "SecondName", "SecurityStamp", "StartDate", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "İstanbul/Maltepe", "Admin", new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1843), "Admin", "2ba6a8f6-9c1e-4caa-b3bc-77493d82a2f8", 2, "admin.admin@bilgeadamboost.com", true, new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1857), "12345678998", "Admin", "Admin", false, null, "Admin", "ADMIN.ADMIN@BILGEADAMBOOST.COM", "ADMIN", "123456aA-", "AQAAAAEAACcQAAAAENB9hvmSXZ6iCzkXFzcY1iWO+fDRO3ihhVJ+qQHObPuuSq/kLMJHLL0WWBKjSJ12Fg==", "12345678901", true, null, 16500m, "Admin", "Admin", "337e202f-55b1-4ef6-a835-711578af66c0", new DateTime(2023, 5, 21, 22, 22, 49, 57, DateTimeKind.Local).AddTicks(1857), 1, false, "Admin" });
+                values: new object[] { 1, 0, "İstanbul/Maltepe", "Admin", new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5621), "Admin", "93f68e2b-f225-4a6d-8db6-a16c6766f8b5", 2, "admin.admin@bilgeadamboost.com", true, new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5629), "12345678998", "Admin", "Admin", false, null, "Admin", "ADMİN.ADMİN@BİLGEADAMBOOST.COM", "ADMİN", "123456aA-", "AQAAAAEAACcQAAAAEDaXsUYI7mDC4OJ5z4BMwUfOTefsH6vHNyonvTLB/J9gZL/08Jbtn3v99MVlXDWK6A==", "12345678901", true, null, 16500m, "Admin", "Admin", "b38ad386-11a4-4c6a-80f7-cc2355a8c8d2", new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5628), 1, false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

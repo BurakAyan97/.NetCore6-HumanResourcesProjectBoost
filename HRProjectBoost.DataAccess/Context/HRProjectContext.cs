@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -39,7 +40,7 @@ namespace HRProjectBoost.DataAccess.Context
                 Name = "Admin",
                 SecondName = "Admin",
                 LastName = "Admin",
-                Password= "123456aA-",
+                Password = "123456aA-",
                 SecondLastName = "Admin",
                 PhoneNumber = "12345678901",
                 BirthDate = DateTime.Now,
@@ -67,10 +68,20 @@ namespace HRProjectBoost.DataAccess.Context
 
             builder.Entity<AppUser>().HasData(user);
 
+            var decimalProps = builder.Model
+            .GetEntityTypes()
+            .SelectMany(t => t.GetProperties())
+            .Where(p => (System.Nullable.GetUnderlyingType(p.ClrType) ?? p.ClrType) == typeof(decimal));
+
+            foreach (var property in decimalProps)
+            {
+                property.SetPrecision(18);
+                property.SetScale(2);
+            }
+
             base.OnModelCreating(builder);
 
         }
-
 
     }
 }
