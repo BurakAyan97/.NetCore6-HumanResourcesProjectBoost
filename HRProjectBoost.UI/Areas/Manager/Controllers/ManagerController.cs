@@ -2,6 +2,7 @@
 using FluentValidation;
 using HRProjectBoost.Business.FluentValidations;
 using HRProjectBoost.DataAccess.Context;
+using HRProjectBoost.DTOs.DTOs.Allowance;
 using HRProjectBoost.DTOs.DTOs.Manager;
 using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
@@ -162,6 +163,12 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
             return View(map);
 
         }
+
+        [HttpGet]
+        public IActionResult GetAllowanceList(AllowanceDto allowanceDto)
+        {
+            return View(allowanceDto);
+        }
        
         public string GenerateRandomPassword(int length = 8)
         {
@@ -196,7 +203,6 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
 
 
         }
-
 
     }
 }

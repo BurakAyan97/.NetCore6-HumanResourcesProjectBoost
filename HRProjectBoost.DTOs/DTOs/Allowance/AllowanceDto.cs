@@ -1,14 +1,13 @@
 ﻿using HRProjectBoost.Entities.Enums;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRProjectBoost.Entities.Domains
+namespace HRProjectBoost.DTOs.DTOs.Allowance
 {
-    public class Allowance
+    public class AllowanceDto
     {
         public int Id { get; set; }
         public AllowanceType AllowanceType { get; set; }
@@ -18,11 +17,5 @@ namespace HRProjectBoost.Entities.Domains
         public DateTime AllowanceCreatedTime { get; set; } = DateTime.Now;
         public DateTime AllowanceAnswerTime { get; set; } = DateTime.Now;
         public byte[]? AllowanceFile { get; set; }
-
-        //Nav Props
-
-        public virtual ICollection<AppUserAllowance>? AppUserAllowances{ get; set; }
-       
-
     }
 }

@@ -1,12 +1,5 @@
 ﻿using HRProjectBoost.Entities.Enums;
-using HRProjectBoost.Entities.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRProjectBoost.Entities.Domains
 {
@@ -29,5 +22,9 @@ namespace HRProjectBoost.Entities.Domains
         public decimal Salary { get; set; }
         public Status Status { get; set; } = Status.Active;
         public byte[]? ProfilePicture { get; set; }
+
+        //Nav Props
+        public virtual ICollection<AppUserAllowance>? AppUserAllowances { get; set; }
+
     }
 }

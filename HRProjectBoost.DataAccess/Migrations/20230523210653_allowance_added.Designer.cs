@@ -4,6 +4,7 @@ using HRProjectBoost.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRProjectBoost.DataAccess.Migrations
 {
     [DbContext(typeof(HRProjectContext))]
-    partial class HRProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20230523210653_allowance_added")]
+    partial class allowance_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,13 +41,13 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.Property<byte[]>("AllowanceFile")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("AllowanceStatus")
-                        .HasColumnType("int");
-
                     b.Property<int>("AllowanceType")
                         .HasColumnType("int");
 
                     b.Property<int>("CurrencyType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DemandStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("Total")
@@ -89,21 +91,21 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "8819198a-608a-4da2-84ff-98bc06837787",
+                            ConcurrencyStamp = "605afe7a-b952-4069-b0e8-fa587e2092ea",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "a0cb8ea9-b79d-414f-bf2d-63ea6a95c009",
+                            ConcurrencyStamp = "cc49adbf-8197-428a-8842-162799ab0f77",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "5224b1fd-6c82-4934-94bd-5b6a4bc67c4d",
+                            ConcurrencyStamp = "7f8f7bc7-314e-4276-800e-7eb400a40894",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         });
@@ -243,13 +245,13 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Admin",
-                            BirthDate = new DateTime(2023, 5, 24, 0, 11, 45, 903, DateTimeKind.Local).AddTicks(4791),
+                            BirthDate = new DateTime(2023, 5, 24, 0, 6, 53, 354, DateTimeKind.Local).AddTicks(4401),
                             CompanyInfo = "Admin",
-                            ConcurrencyStamp = "8a1c7fe5-f345-4c6d-9355-19000ffd29b2",
+                            ConcurrencyStamp = "9f2000ad-f9fa-45fa-944e-3f828830470f",
                             Department = 2,
                             Email = "admin.admin@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 5, 24, 0, 11, 45, 903, DateTimeKind.Local).AddTicks(4799),
+                            EndDate = new DateTime(2023, 5, 24, 0, 6, 53, 354, DateTimeKind.Local).AddTicks(4409),
                             IdentityNumber = "12345678998",
                             Job = "Admin",
                             LastName = "Admin",
@@ -258,14 +260,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             NormalizedEmail = "ADMİN.ADMİN@BİLGEADAMBOOST.COM",
                             NormalizedUserName = "ADMİN",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMZE10K/m/+Uih41XwnPedUVHfAcBxb4VlJSH9xsT7Yp4YvH+p4yNf4C/JIlBXxtPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENeSsCfR35BE1lDOP/E4HPvRgwLfcfx5oGdjgL0gdf5+G2brLNpU4KF4be5gYi6VmQ==",
                             PhoneNumber = "12345678901",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "Admin",
                             SecondName = "Admin",
-                            SecurityStamp = "5601d49e-6a0a-4b15-9212-31a4252e858c",
-                            StartDate = new DateTime(2023, 5, 24, 0, 11, 45, 903, DateTimeKind.Local).AddTicks(4798),
+                            SecurityStamp = "c5278f4d-4cb4-489a-ae27-4db68920d67e",
+                            StartDate = new DateTime(2023, 5, 24, 0, 6, 53, 354, DateTimeKind.Local).AddTicks(4408),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
