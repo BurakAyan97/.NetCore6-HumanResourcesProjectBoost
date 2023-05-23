@@ -42,6 +42,7 @@
                             <input type="submit" value="Save" class="btn btn-primary" />
                         </div>
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div @ViewBag.ErrorMessage class="text-danger"></div>
                     </form>
                 </div>
             </div>

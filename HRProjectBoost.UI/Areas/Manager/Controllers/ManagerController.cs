@@ -88,7 +88,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Hatalar oluştu.");
+                //ModelState.AddModelError("", "Hatalar oluştu.");
                 
                 string errorMessage = string.Join(", ", validatorResult.Errors.Select(error => error.ErrorMessage));
                 ViewBag.ErrorMessage = errorMessage; // Hata alabiliyoruz ancak msji ekrana veremedik henuz viewbag yerine Toastr kurulacak...
@@ -130,7 +130,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
                     Department = dto.Department,
                     Address = dto.Address,
                     Salary = dto.Salary,
-                    Email = $"{dto.Name}.{dto.LastName}@bilgeadam.com",
+                    Email = $"{dto.Name}.{dto.LastName}@bilgeadam.com".ToLower(),
 
                 };
 
@@ -162,6 +162,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
             return View(map);
 
         }
+       
         public string GenerateRandomPassword(int length = 8)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
