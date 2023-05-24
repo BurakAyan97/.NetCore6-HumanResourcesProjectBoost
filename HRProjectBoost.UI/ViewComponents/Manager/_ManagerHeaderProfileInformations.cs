@@ -25,7 +25,7 @@ namespace HRProjectBoost.UI.ViewComponents.Manager
             ViewBag.LastName = datas.LastName;
             ViewBag.Job = datas.Job;
             ViewBag.Photo = datas.ProfilePicture;
-            return View();
+            return View(datas);
         }
     }
 }
