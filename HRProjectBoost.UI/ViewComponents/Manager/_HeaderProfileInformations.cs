@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRProjectBoost.UI.ViewComponents.Manager
 {
-    public class _ManagerHeaderProfileInformations : ViewComponent
+    public class _HeaderProfileInformations : ViewComponent
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IMapper _mapper;
 
-        public _ManagerHeaderProfileInformations(UserManager<AppUser> userManager, IMapper mapper)
+        public _HeaderProfileInformations(UserManager<AppUser> userManager, IMapper mapper)
         {
             this.userManager = userManager;
             _mapper = mapper;
@@ -25,7 +25,7 @@ namespace HRProjectBoost.UI.ViewComponents.Manager
             ViewBag.LastName = datas.LastName;
             ViewBag.Job = datas.Job;
             ViewBag.Photo = datas.ProfilePicture;
-            return View(datas);
+            return View();
         }
     }
 }

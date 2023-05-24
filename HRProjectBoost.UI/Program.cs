@@ -46,10 +46,14 @@ app.MapAreaControllerRoute(
   pattern: "Manager/{controller=Manager}/{action=Index}/{id?}"
 );
 
+app.MapAreaControllerRoute(
+  name: "Personnel",
+  areaName: "Personnel",
+  pattern: "Personnel/{controller=Personnel}/{action=Index}/{id?}"
+);
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=User}/{action=Login}");
-
-
 
 app.Run();

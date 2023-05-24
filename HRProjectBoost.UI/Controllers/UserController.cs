@@ -39,8 +39,10 @@ namespace HRProjectBoost.UI.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
-                        return User.IsInRole("Personnel") ? RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" })
-                                                          : RedirectToAction("Index", "Manager", new { area = "Manager" });
+                        if (User.IsInRole("Personnel"))
+                            return RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" });
+                        else
+                            return RedirectToAction("Index", "Manager", new { area = "Manager" });
                     //Admin rolü gelirse burası değişebilir.
                 }
                 else

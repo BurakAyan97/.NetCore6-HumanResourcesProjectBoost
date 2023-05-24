@@ -4,12 +4,14 @@ using HRProjectBoost.DataAccess.Context;
 using HRProjectBoost.DTOs.DTOs.Manager;
 using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRProjectBoost.UI.Areas.Personnel.Controllers
 {
+    [AllowAnonymous]
     public class PersonnelController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
