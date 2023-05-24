@@ -15,6 +15,8 @@ namespace HRProjectBoost.Business.Mappings.AutoMapper
         {
             CreateMap<AppUser,PersonnelCreateDto>().ReverseMap();
             CreateMap<AppUser,PersonnelListDto>().ReverseMap();
+            CreateMap<AppUser, PersonnelDetailsDTO>().ReverseMap();
+
         }
     }
 }

@@ -100,16 +100,16 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreatePersonnel()
+        public IActionResult CreatePersonnel()//GENERIC KURULACAK!!!
         {
             return View(new PersonnelCreateDto() { UserName = "deneme" });
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePersonnel(PersonnelCreateDto dto)
+        public async Task<IActionResult> CreatePersonnel(PersonnelCreateDto dto)//GENERIC KURULACAK!!!
         {
             var password = GenerateRandomPassword();
-
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             if (ModelState.IsValid)
             {
                 AppUser appuser = new()
@@ -126,23 +126,23 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
                     IdentityNumber = dto.IdentityNumber,
                     StartDate = dto.StartDate,
                     EndDate = dto.EndDate,
-                    CompanyInfo = TempData["company"].ToString(),
+                    CompanyInfo = user.CompanyInfo,
                     Job = dto.Job,
                     Department = dto.Department,
                     Address = dto.Address,
                     Salary = dto.Salary,
-                    Email = $"{dto.Name}.{dto.LastName}@bilgeadam.com".ToLower(),
+                    Email = $"{dto.Name}.{dto.LastName}@bilgeadamboost.com".ToLower(),
 
                 };
 
-                await SendPasswordEmail($"{dto.Name}{dto.LastName}@gmail.com", password);
+                await SendPasswordEmail($"{dto.Name}{dto.LastName}@bilgeadamboost.com", password);
 
                 var result = await _userManager.CreateAsync(appuser, password);
 
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(appuser, "Personnel");
-                    return RedirectToAction("Index"); //"PersonnelList");
+                    return RedirectToAction("GetPersonnelList"); //"Index");
 
                 }
                 else
@@ -152,6 +152,15 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
                 }
             }
             return View(dto);
+        }
+
+        [Route("Manager/Manager/DeletePersonel/{Email?}")] //GENERIC KURULACAK!!!
+        public async Task<IActionResult> DeletePersonnel(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+            return RedirectToAction("GetPersonnelList");
         }
 
         [HttpGet]
