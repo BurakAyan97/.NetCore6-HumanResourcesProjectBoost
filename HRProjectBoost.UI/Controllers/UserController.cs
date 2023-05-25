@@ -30,21 +30,24 @@ namespace HRProjectBoost.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto user)
         {
-
             if (ModelState.IsValid)
             {
                 AppUser appUser = await _userManager.FindByEmailAsync(user.Email);
 
                 if (appUser != null && user.Password == appUser.Password)
-                {                   
+                {
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
+
                     if (result.Succeeded)
-                        return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                        if (User.IsInRole("Personnel"))
+                            return RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" });
+                        else
+                            return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                    //Admin rolü gelirse burası değişebilir.
                 }
                 else
-                {
-                    ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");                  
-                }
+                    ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");
+
                 return View(user);
             }
             return View(user);
