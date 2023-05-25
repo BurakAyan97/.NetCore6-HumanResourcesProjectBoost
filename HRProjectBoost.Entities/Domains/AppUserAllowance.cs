@@ -11,9 +11,9 @@ namespace HRProjectBoost.Entities.Domains
         public int AppUserAllowanceID { get; set; }
 
         public int AppUserID { get; set; }
-        public AppUser? AppUser { get; set; }
+        public virtual AppUser? AppUser { get; set; }
 
         public int AllowanceID { get; set; }
-        public Allowance? Allowance { get; set; }
+        public virtual Allowance? Allowance { get; set; }
     }
 }

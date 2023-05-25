@@ -15,8 +15,8 @@ namespace HRProjectBoost.DataAccess.Configurations
         {
             builder.HasKey(x => new{ x.AppUserID,x.AllowanceID});
 
-            builder.HasOne(x => x.AppUser).WithMany(x => x.AppUserAllowances).HasForeignKey(x => x.AppUserID);
-            builder.HasOne(x => x.Allowance).WithMany(x => x.AppUserAllowances).HasForeignKey(x => x.AllowanceID);
+            builder.HasOne(x => x.AppUser).WithMany(x => x.AppUserAllowances).HasForeignKey(x => x.AppUserID).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Allowance).WithMany(x => x.AppUserAllowances).HasForeignKey(x => x.AllowanceID).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

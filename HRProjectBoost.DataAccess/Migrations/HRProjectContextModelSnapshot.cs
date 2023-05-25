@@ -53,7 +53,7 @@ namespace HRProjectBoost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Allowance");
+                    b.ToTable("Allowance", (string)null);
                 });
 
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppRole", b =>
@@ -292,7 +292,7 @@ namespace HRProjectBoost.DataAccess.Migrations
 
                     b.HasIndex("AppUserID");
 
-                    b.ToTable("AppUserAllowance");
+                    b.ToTable("AppUserAllowance", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

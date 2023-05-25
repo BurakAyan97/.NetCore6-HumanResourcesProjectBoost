@@ -23,6 +23,9 @@ namespace HRProjectBoost.DataAccess.Context
         {
 
         }
+
+        public DbSet<Allowance> Allowances { get; set; }
+        public DbSet<AppUserAllowance> AppUsersAllowances{ get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AppRole>().HasData(
@@ -65,11 +68,7 @@ namespace HRProjectBoost.DataAccess.Context
             
             PasswordHasher<AppUser> passwordHasher = new PasswordHasher<AppUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "123456aA-");
-
-            IdentityUserRole<int> seedUserRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1 };
-
-            builder.Entity<IdentityUserRole<int>>().HasData(seedUserRole);
-
+            
             builder.Entity<AppUser>().HasData(user);
 
             var decimalProps = builder.Model

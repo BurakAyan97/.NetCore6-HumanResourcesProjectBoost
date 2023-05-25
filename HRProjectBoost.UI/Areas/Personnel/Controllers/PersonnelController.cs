@@ -1,6 +1,7 @@
 using AutoMapper;
 using HRProjectBoost.Business.FluentValidations;
 using HRProjectBoost.DataAccess.Context;
+using HRProjectBoost.DTOs.DTOs.Allowance;
 using HRProjectBoost.DTOs.DTOs.Manager;
 using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace HRProjectBoost.UI.Areas.Personnel.Controllers
 {
@@ -93,9 +95,42 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
             return View();
         }
 
-      
+        public IActionResult CreateAllowance()
+        {
+            return View();
+        }
 
-   
+        [HttpPost]
+        public async Task<IActionResult> CreateAllowance(AllowanceCreateDto allowanceCreateDto)
+        {
+            var ext = Path.GetExtension(allowanceCreateDto.AllowanceFile.FileName);
+            var path = Directory.GetCurrentDirectory() + "/wwwroot" + "pdfs" + allowanceCreateDto.FileName + ext;
+
+            if (ModelState.IsValid)
+            {
+                if (allowanceCreateDto.AllowanceFile.ContentType == "image/jpeg" || allowanceCreateDto.AllowanceFile.ContentType == "application/pdf")
+                {
+                    FileStream stream = new FileStream(path, FileMode.Create);
+                    await allowanceCreateDto.AllowanceFile.CopyToAsync(stream);
+                }
+                else
+                    ModelState.AddModelError("", "Wrong Format.Please use only pdf or jpeg.");
+
+                Allowance allowance = new();
+                allowance.AllowanceStatus = allowanceCreateDto.AllowanceStatus;
+                allowance.AllowanceType = allowanceCreateDto.AllowanceType;
+                allowance.CurrencyType = allowanceCreateDto.CurrencyType;
+                allowance.AllowanceCreatedTime = allowanceCreateDto.AllowanceCreatedTime;
+                allowance.Total = allowanceCreateDto.Total;
+                _context.Allowances.Add(allowance);
+                await _context.SaveChangesAsync();
+            }
+            return View(allowanceCreateDto);
+        }
+
+
+
+
 
 
     }

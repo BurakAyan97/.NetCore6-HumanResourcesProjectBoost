@@ -31,6 +31,7 @@
     <Folder Include="Areas\Manager\Models\" />
     <Folder Include="Areas\Personnel\Data\" />
     <Folder Include="Areas\Personnel\Models\" />
+    <Folder Include="wwwroot\pdfs\" />
     <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 
