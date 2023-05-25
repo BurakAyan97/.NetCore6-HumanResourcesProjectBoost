@@ -131,11 +131,11 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
                     Department = dto.Department,
                     Address = dto.Address,
                     Salary = dto.Salary,
-                    Email = $"{dto.Name}.{dto.LastName}@bilgeadamboost.com".ToLower(),
-
+                    Email = $"{dto.Name}{dto.LastName}@bilgeadamboost.com".ToLower(),
                 };
+                              
+                await SendPasswordEmail(appuser.Email, password);
 
-                await SendPasswordEmail($"{dto.Name}{dto.LastName}@bilgeadamboost.com", password);
 
                 var result = await _userManager.CreateAsync(appuser, password);
 
@@ -164,11 +164,11 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPersonnelList(PersonnelListDto dto)
+        public async Task<IActionResult> GetPersonnelList(PersonnelDto dto)
         {
             //GENERİC REPOSİTORY OLUŞTURULACAK DENEME OLARAK AŞAĞIDAKİ ŞEKİLDE YAPILDI.
             var users = await _context.Users.ToListAsync();
-            var map = _mapper.Map<List<PersonnelListDto>>(users);
+            var map = _mapper.Map<List<PersonnelDto>>(users);
             return View(map);
 
         }

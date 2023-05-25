@@ -56,6 +56,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=User}/{action=Login}");
 
-
-
 app.Run();
