@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRProjectBoost.Business.FluentValidations
 {
-    public class PersonnelUpdateDtoValidator : AbstractValidator<PersonnelUpdateDto>
+    public class PersonnelUpdateDtoValidator : AbstractValidator<PersonnelUpdateDTO>
     {
         public PersonnelUpdateDtoValidator()
         {

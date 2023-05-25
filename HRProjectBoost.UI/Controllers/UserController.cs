@@ -1,4 +1,5 @@
 ﻿using HRProjectBoost.DTOs.DTOs.Authentication;
+using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -39,10 +40,16 @@ namespace HRProjectBoost.UI.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
-                        if (User.IsInRole("Personnel"))
-                            return RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" });
-                        else
+                    {
+                        var personnelUser = await _userManager.IsInRoleAsync(appUser, "Personnel");
+                        var managerUser = await _userManager.IsInRoleAsync(appUser, "Manager");
+                        
+                        if (personnelUser)
+                            return RedirectToAction("ChangePassword");
+                        else if (managerUser)
                             return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                    }
+
                     //Admin rolü gelirse burası değişebilir.
                 }
                 else
@@ -53,11 +60,49 @@ namespace HRProjectBoost.UI.Controllers
             return View(user);
         }
 
-        [Route("Manager/User/LogoutAsync")]
-        public async Task<IActionResult> LogoutAsync()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(PersonnelChangePasswordDto changePasswordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(changePasswordDto);
+            }
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user is not null)
+            {
+                var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    user.Password = changePasswordDto.NewPassword;
+                    await _userManager.UpdateAsync(user);
+                    return RedirectToAction(nameof(Logout));
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            else
+                ModelState.AddModelError("", "User cannot be found");
+
+            return RedirectToAction("Logout");
         }
     }
 }

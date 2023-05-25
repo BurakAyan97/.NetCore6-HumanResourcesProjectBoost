@@ -23,15 +23,17 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly HRProjectContext _context;
         private readonly IMapper _mapper;
 
-        public ManagerController(UserManager<AppUser> userManager, HRProjectContext context, IMapper mapper, RoleManager<AppRole> roleManager)
+        public ManagerController(UserManager<AppUser> userManager, HRProjectContext context, IMapper mapper, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _context = context;
             _mapper = mapper;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -90,10 +92,10 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
             else
             {
                 //ModelState.AddModelError("", "Hatalar oluştu.");
-                
+
                 string errorMessage = string.Join(", ", validatorResult.Errors.Select(error => error.ErrorMessage));
                 ViewBag.ErrorMessage = errorMessage; // Hata alabiliyoruz ancak msji ekrana veremedik henuz viewbag yerine Toastr kurulacak...
-                return RedirectToAction("Update",dto);
+                return RedirectToAction("Update", dto);
             }
 
             return View();
@@ -102,11 +104,11 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult CreatePersonnel()//GENERIC KURULACAK!!!
         {
-            return View(new PersonnelCreateDto() { UserName = "deneme" });
+            return View(new PersonnelCreateDTO() { UserName = "deneme" });
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePersonnel(PersonnelCreateDto dto)//GENERIC KURULACAK!!!
+        public async Task<IActionResult> CreatePersonnel(PersonnelCreateDTO dto)//GENERIC KURULACAK!!!
         {
             var password = GenerateRandomPassword();
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
@@ -133,7 +135,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
                     Salary = dto.Salary,
                     Email = $"{dto.Name}{dto.LastName}@bilgeadamboost.com".ToLower(),
                 };
-                              
+
                 await SendPasswordEmail(appuser.Email, password);
 
 
@@ -164,11 +166,11 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPersonnelList(PersonnelDto dto)
+        public async Task<IActionResult> GetPersonnelList(PersonnelDTO dto)
         {
             //GENERİC REPOSİTORY OLUŞTURULACAK DENEME OLARAK AŞAĞIDAKİ ŞEKİLDE YAPILDI.
             var users = await _context.Users.ToListAsync();
-            var map = _mapper.Map<List<PersonnelDto>>(users);
+            var map = _mapper.Map<List<PersonnelDTO>>(users);
             return View(map);
 
         }
@@ -178,7 +180,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         {
             return View(allowanceDto);
         }
-       
+
         public string GenerateRandomPassword(int length = 8)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -212,6 +214,8 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
 
 
         }
+
+
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRProjectBoost.DTOs.DTOs.Personnel
 {
-    public class PersonnelDto
+    public class PersonnelDTO
     {
         public byte[]? ProfilePicture { get; set; }
         public string UserName { get; set; }

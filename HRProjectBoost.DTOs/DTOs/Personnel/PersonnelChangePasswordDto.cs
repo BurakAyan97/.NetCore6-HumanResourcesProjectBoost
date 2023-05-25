@@ -10,7 +10,6 @@ namespace HRProjectBoost.DTOs.DTOs.Personnel
 {
     public class PersonnelChangePasswordDto
     {
-        public string Email{ get; set; }
 
         [Required]
         [DataType(DataType.Password)]

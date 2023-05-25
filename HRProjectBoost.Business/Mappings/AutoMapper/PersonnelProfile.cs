@@ -13,10 +13,11 @@ namespace HRProjectBoost.Business.Mappings.AutoMapper
     {
         public PersonnelProfile()
         {
-            CreateMap<AppUser,PersonnelCreateDto>().ReverseMap();
-            CreateMap<AppUser,PersonnelDto>().ReverseMap();
-            CreateMap<AppUser,PersonnelUpdateDto>().ReverseMap();
+            CreateMap<AppUser,PersonnelCreateDTO>().ReverseMap();
+            CreateMap<AppUser,PersonnelDTO>().ReverseMap();
+            CreateMap<AppUser,PersonnelUpdateDTO>().ReverseMap();
             CreateMap<AppUser,PersonnelDetailsDTO>().ReverseMap();
+            //CreateMap<AppUser,PersonnelChangePasswordDto>().ReverseMap();
 
         }
     }

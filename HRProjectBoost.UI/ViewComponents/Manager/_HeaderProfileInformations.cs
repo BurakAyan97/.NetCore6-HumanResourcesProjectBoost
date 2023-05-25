@@ -4,6 +4,7 @@ using HRProjectBoost.DTOs.DTOs.Manager;
 using HRProjectBoost.Entities.Domains;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HRProjectBoost.UI.ViewComponents.Manager
 {

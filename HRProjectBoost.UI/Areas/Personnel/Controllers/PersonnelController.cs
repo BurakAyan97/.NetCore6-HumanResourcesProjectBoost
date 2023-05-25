@@ -33,25 +33,25 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
         {
             var datas = await _userManager.FindByNameAsync(this.User.Identity.Name);
             TempData["company"] = datas.CompanyInfo;
-            return View(_mapper.Map<PersonnelDto>(datas));
+            return View(_mapper.Map<PersonnelDTO>(datas));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(PersonnelDetailsDto dto)
+        public async Task<IActionResult> Details(PersonnelDetailsDTO dto)
         {
             var datas = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            return View(_mapper.Map<PersonnelDetailsDto>(datas));
+            return View(_mapper.Map<PersonnelDetailsDTO>(datas));
         }
 
         [HttpGet]
         public async Task<IActionResult> Update()
         {
             var datas = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            return View(_mapper.Map<PersonnelUpdateDto>(datas));
+            return View(_mapper.Map<PersonnelUpdateDTO>(datas));
         }
 
         [HttpPost]
-        public async Task<object> Update(PersonnelUpdateDto dto)
+        public async Task<object> Update(PersonnelUpdateDTO dto)
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var UpdateValidator = new PersonnelUpdateDtoValidator();
@@ -93,36 +93,10 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
+      
 
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword(PersonnelChangePasswordDto changePasswordDto)
-        {
-            var user = await _userManager.FindByEmailAsync(changePasswordDto.Email);
-            if (user is not null)
-            {
-                var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignOutAsync();
-                    return RedirectToAction("Login", "User");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-            }
-            else
-                ModelState.AddModelError("", "User cannot be found");
+   
 
-            return View(user);
-        }
+
     }
 }
