@@ -17,12 +17,13 @@ namespace HRProjectBoost.Entities.Domains
         public AllowanceStatus AllowanceStatus { get; set; } = AllowanceStatus.Waiting;
         public DateTime AllowanceCreatedTime { get; set; } = DateTime.Now;
         public DateTime AllowanceAnswerTime { get; set; } = DateTime.Now;
-        public byte[]? AllowanceFile { get; set; }
 
         //Nav Props
 
-        public virtual ICollection<AppUserAllowance>? AppUserAllowances{ get; set; }
-       
+        public virtual ICollection<AppUserAllowance>? AppUserAllowances { get; set; }
+
+
+
 
     }
 }

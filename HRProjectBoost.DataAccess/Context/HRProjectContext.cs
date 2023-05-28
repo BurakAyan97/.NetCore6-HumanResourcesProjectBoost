@@ -24,7 +24,7 @@ namespace HRProjectBoost.DataAccess.Context
 
         }
 
-        public DbSet<Allowance> Allowances { get; set; }
+        public DbSet<Allowance> Allowance { get; set; }
         public DbSet<AppUserAllowance> AppUsersAllowances{ get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {

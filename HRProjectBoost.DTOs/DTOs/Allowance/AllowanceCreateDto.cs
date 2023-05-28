@@ -1,5 +1,7 @@
 ﻿using HRProjectBoost.Entities.Enums;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,9 @@ namespace HRProjectBoost.DTOs.DTOs.Allowance
         public int Total { get; set; }
         public CurrencyType CurrencyType { get; set; }
         public AllowanceStatus AllowanceStatus { get; set; } = AllowanceStatus.Waiting;
-        public DateTime AllowanceCreatedTime { get; set; } = DateTime.Now;
+        public DateTime AllowanceCreatedTime { get; set; } = DateTime.Parse(DateTime.Now.ToShortDateString());
         public string? FileName { get; set; }
         public IFormFile? AllowanceFile { get; set; }
-
+       
     }
 }

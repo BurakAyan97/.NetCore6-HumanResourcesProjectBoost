@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using FluentValidation;
 using HRProjectBoost.Business.FluentValidations;
 using HRProjectBoost.DataAccess.Context;

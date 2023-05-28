@@ -2,14 +2,11 @@ using AutoMapper;
 using HRProjectBoost.Business.FluentValidations;
 using HRProjectBoost.DataAccess.Context;
 using HRProjectBoost.DTOs.DTOs.Allowance;
-using HRProjectBoost.DTOs.DTOs.Manager;
 using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 
 namespace HRProjectBoost.UI.Areas.Personnel.Controllers
 {
@@ -122,13 +119,12 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
                 allowance.CurrencyType = allowanceCreateDto.CurrencyType;
                 allowance.AllowanceCreatedTime = allowanceCreateDto.AllowanceCreatedTime;
                 allowance.Total = allowanceCreateDto.Total;
-                _context.Allowances.Add(allowance);
+
+                _context.Allowance.Add(allowance);
                 await _context.SaveChangesAsync();
             }
             return View(allowanceCreateDto);
         }
-
-
 
 
 
