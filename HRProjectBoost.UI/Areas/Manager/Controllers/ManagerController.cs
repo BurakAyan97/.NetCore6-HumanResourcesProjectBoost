@@ -53,6 +53,14 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> GetPersonelDetails(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            var dto = _mapper.Map<PersonnelDetailsDTO>(user);
+            return View("PersonnelDetails", dto);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Update()
         {
             var datas = await _userManager.FindByNameAsync(this.User.Identity.Name);

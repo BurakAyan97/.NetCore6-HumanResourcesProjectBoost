@@ -15,7 +15,7 @@ namespace HRProjectBoost.DataAccess.Extensions
     {
         public static IServiceCollection LoadDataLayerExtensions(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<HRProjectContext>(opt => opt.UseSqlServer(config.GetConnectionString("AzureDB")));
+            services.AddDbContext<HRProjectContext>(opt => opt.UseSqlServer(config.GetConnectionString("OguzhanDB")));
 
 
             services.AddIdentity<AppUser, AppRole>(opt =>
