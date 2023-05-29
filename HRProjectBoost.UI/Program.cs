@@ -10,8 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //DataAccess katmanı için yapılan extensionlar.
 builder.Services.LoadDataLayerExtensions(builder.Configuration);
-
-
 //Bussiness katmanı için yapılan extensionlar
 builder.Services.AddDependencies();
 

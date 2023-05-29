@@ -101,7 +101,7 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
         public async Task<IActionResult> CreateAllowance(AllowanceCreateDto allowanceCreateDto)
         {
             var ext = Path.GetExtension(allowanceCreateDto.AllowanceFile.FileName);
-            var path = Directory.GetCurrentDirectory() + "/wwwroot" + "pdfs" + allowanceCreateDto.FileName + ext;
+            var path = Directory.GetCurrentDirectory() + "/wwwroot/pdfs/" + Guid.NewGuid().ToString() + ext;
 
             if (ModelState.IsValid)
             {
@@ -119,14 +119,15 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
                 allowance.CurrencyType = allowanceCreateDto.CurrencyType;
                 allowance.AllowanceCreatedTime = allowanceCreateDto.AllowanceCreatedTime;
                 allowance.Total = allowanceCreateDto.Total;
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                allowance.AppUserId = user.Id;
+                allowance.Path = path.Substring(path.Length -40);
 
                 _context.Allowance.Add(allowance);
                 await _context.SaveChangesAsync();
             }
             return View(allowanceCreateDto);
         }
-
-
 
 
     }

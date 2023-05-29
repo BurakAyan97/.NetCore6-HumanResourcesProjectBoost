@@ -24,7 +24,7 @@ namespace HRProjectBoost.Entities.Domains
         public byte[]? ProfilePicture { get; set; }
 
         //Nav Props
-        public virtual ICollection<AppUserAllowance>? AppUserAllowances { get; set; }
+        public virtual ICollection<Allowance>? Allowances { get; set; }
 
     }
 }

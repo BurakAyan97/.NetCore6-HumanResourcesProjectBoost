@@ -22,7 +22,9 @@ namespace HRProjectBoost.Business.DependencyResolvers
                 opt.AddProfile(new ManagerProfile());
                 opt.AddProfile(new PersonnelProfile());
                 opt.AddProfile(new AuthenticationProfile());
+                opt.AddProfile(new AllowanceProfile());
             });
+
 
             var mapper = configuration.CreateMapper();
 

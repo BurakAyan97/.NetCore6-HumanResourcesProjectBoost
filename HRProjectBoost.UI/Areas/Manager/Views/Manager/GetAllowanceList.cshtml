@@ -1,4 +1,5 @@
-﻿@model HRProjectBoost.DTOs.DTOs.Allowance.AllowanceDto
+﻿@using HRProjectBoost.Entities.Enums
+@model List<HRProjectBoost.DTOs.DTOs.Allowance.AllowanceDto>
 @{
     ViewData["Title"] = "GetAllowanceList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,9 +7,91 @@
 
 <h1>GetAllowanceList</h1>
 
-<table>
-    <tr>
-        <td></td>
-    </tr>
-</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AppUser.Name) @Html.DisplayNameFor(model => model[0].AppUser.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AllowanceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CurrencyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AllowanceCreatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AllowanceStatus)
+            </th>
+            <th>
+                @Html.DisplayName("File")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
 
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppUser.Name) @Html.DisplayFor(modelItem => item.AppUser.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowanceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrencyType)@*Valuesu getirilecek*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowanceCreatedTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowanceStatus)@*Valuesu getirilecek*@
+                </td>
+                <td>
+                    @*<a href="@item.Path"> @Html.DisplayFor(modelItem => item.Path)</a>*@
+
+
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.AppUser.Name@item.Id">
+                        @item.Path
+                    </button>  @*Burası dto strin id degeri eklenerek duzeltilecek bu sekilde zorlama oldu*@
+                </td>
+                <td>
+                    <span>@Html.ActionLink("Accept", "AcceptAllowance", new { Id=item.Id  }, htmlAttributes: new { @class = "btn btn-success", @role="button" }) </span>
+
+                    <span>@Html.ActionLink("Decline", "DeclineAllowance", new {  Id=item.Id  }, htmlAttributes: new { @class = "btn btn-danger", @role="button" }) </span>
+                </td>
+            </tr>
+            <div class="modal fade" id="@item.AppUser.Name@item.Id" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                @*Burası dto strin id degeri eklenerek duzeltilecek bu sekilde zorlama oldu*@
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe src="~/pdfs/@item.Path" width="100%" height="500px"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </tbody>
+</table>

@@ -185,9 +185,11 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllowanceList(AllowanceDto allowanceDto)
+        public IActionResult GetAllowanceList()
         {
-            return View(allowanceDto);
+            List<Allowance> allowanceList = _context.Allowance.Include(x=> x.AppUser).ToList();
+            var dto = _mapper.Map<List<AllowanceDto>>(allowanceList);
+            return View(dto);
         }
 
         public string GenerateRandomPassword(int length = 8)
@@ -221,10 +223,27 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
             //a.Send(mesaj);
             a.SendAsync(mesaj, userState);
 
-
         }
 
+        [Route("Manager/{controller}/{action}/{id?}")]
+        public async Task<IActionResult> DeclineAllowance(int id)
+        {
+            var allowance = await _context.Allowance.FindAsync(id);
+            allowance.AllowanceStatus = Entities.Enums.AllowanceStatus.Denied;
+            _context.Allowance.Update(allowance);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("GetAllowanceList");
+        }
 
+        [Route("Manager/{controller}/{action}/{id?}")]
+        public async Task<IActionResult> AcceptAllowance(int id)
+        {
+            var allowance = await _context.Allowance.FindAsync(id);
+            allowance.AllowanceStatus = Entities.Enums.AllowanceStatus.Accepted;
+            _context.Allowance.Update(allowance);
+            await _context.SaveChangesAsync();
 
+            return RedirectToAction("GetAllowanceList");
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using HRProjectBoost.Entities.Enums;
+﻿using HRProjectBoost.Entities.Domains;
+using HRProjectBoost.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HRProjectBoost.DTOs.DTOs.Allowance
 {
@@ -16,6 +18,9 @@ namespace HRProjectBoost.DTOs.DTOs.Allowance
         public AllowanceStatus AllowanceStatus { get; set; } = AllowanceStatus.Waiting;
         public DateTime AllowanceCreatedTime { get; set; } = DateTime.Now;
         public DateTime AllowanceAnswerTime { get; set; } = DateTime.Now;
-        public byte[]? AllowanceFile { get; set; }
+        public string Path { get; set; }
+
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

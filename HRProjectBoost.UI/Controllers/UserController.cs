@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace HRProjectBoost.UI.Controllers
 {
     [AllowAnonymous]
     public class UserController : Controller
     {
+
+
+
 
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
@@ -20,6 +22,7 @@ namespace HRProjectBoost.UI.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+
         }
 
         [HttpGet]
@@ -31,6 +34,8 @@ namespace HRProjectBoost.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto user)
         {
+
+
             if (ModelState.IsValid)
             {
                 AppUser appUser = await _userManager.FindByEmailAsync(user.Email);
@@ -43,7 +48,10 @@ namespace HRProjectBoost.UI.Controllers
                     {
                         var personnelUser = await _userManager.IsInRoleAsync(appUser, "Personnel");
                         var managerUser = await _userManager.IsInRoleAsync(appUser, "Manager");
-                        
+
+                        //ViewBag.NotificationType = "Succes";
+                        //ViewBag.NotificationMessage = "Login succeed!";
+
                         if (personnelUser)
                             return RedirectToAction("ChangePassword");
                         else if (managerUser)
@@ -53,7 +61,12 @@ namespace HRProjectBoost.UI.Controllers
                     //Admin rolü gelirse burası değişebilir.
                 }
                 else
+                {
                     ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");
+                    //ViewBag.NotificationType = "Failed";
+                    //ViewBag.NotificationMessage = "Login failed!";
+
+                }
 
                 return View(user);
             }

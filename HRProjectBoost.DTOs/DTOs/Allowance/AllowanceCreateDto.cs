@@ -17,7 +17,7 @@ namespace HRProjectBoost.DTOs.DTOs.Allowance
         public CurrencyType CurrencyType { get; set; }
         public AllowanceStatus AllowanceStatus { get; set; } = AllowanceStatus.Waiting;
         public DateTime AllowanceCreatedTime { get; set; } = DateTime.Parse(DateTime.Now.ToShortDateString());
-        public string? FileName { get; set; }
+        public string Path { get; set; }
         public IFormFile? AllowanceFile { get; set; }
        
     }

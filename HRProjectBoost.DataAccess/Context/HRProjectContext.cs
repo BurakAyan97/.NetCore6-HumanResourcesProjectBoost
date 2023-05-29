@@ -25,7 +25,6 @@ namespace HRProjectBoost.DataAccess.Context
         }
 
         public DbSet<Allowance> Allowance { get; set; }
-        public DbSet<AppUserAllowance> AppUsersAllowances{ get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AppRole>().HasData(
@@ -64,15 +63,52 @@ namespace HRProjectBoost.DataAccess.Context
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
 
+            AppUser personelSeed = new AppUser()
+            {
+                Id = 2,
+                UserName = "Personel",
+                NormalizedUserName = "Personel".ToUpper(),
+                Name = "Personel",
+                SecondName = "Personel",
+                LastName = "Personel",
+                Password = "123456aA-",
+                SecondLastName = "Personel",
+                PhoneNumber = "905423985612",
+                BirthDate = DateTime.Now,
+                BirthCity = "Personel",
+                IdentityNumber = "41104925332",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                CompanyInfo = "Personel",
+                Job = "Personel",
+                Department = Entities.Enums.Department.Engineer,
+                Address = "İstanbul/Maltepe",
+                Salary = 16500,
+                Email = "personel.personel@bilgeadamboost.com",
+                NormalizedEmail = "personel.personel@bilgeadamboost.com".ToUpper(),
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = true,
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+
             //seed userin rolu manager olacak EKLENECEK!!
-            
-            PasswordHasher<AppUser> passwordHasher = new PasswordHasher<AppUser>();
-            user.PasswordHash = passwordHasher.HashPassword(user, "123456aA-");
-           
-            IdentityUserRole<int> seedUserRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1 };
-            builder.Entity<IdentityUserRole<int>>().HasData(seedUserRole);
-            
+
+            PasswordHasher<AppUser> passwordHasherManager = new PasswordHasher<AppUser>();
+            user.PasswordHash = passwordHasherManager.HashPassword(user, "123456aA-");
+
+            PasswordHasher<AppUser> passwordHasherPersonel = new PasswordHasher<AppUser>();
+            personelSeed.PasswordHash = passwordHasherPersonel.HashPassword(personelSeed, "123456aA-");
+
+            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1 };
+            builder.Entity<IdentityUserRole<int>>().HasData(seedManagerRole);
+
+            IdentityUserRole<int> seedPersonelRole = new IdentityUserRole<int>() { RoleId = 3, UserId = 2 };
+            builder.Entity<IdentityUserRole<int>>().HasData(seedPersonelRole);
+
             builder.Entity<AppUser>().HasData(user);
+            builder.Entity<AppUser>().HasData(personelSeed);
+
 
             var decimalProps = builder.Model
             .GetEntityTypes()
