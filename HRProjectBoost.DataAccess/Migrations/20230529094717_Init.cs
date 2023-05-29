@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HRProjectBoost.DataAccess.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,7 +44,7 @@ namespace HRProjectBoost.DataAccess.Migrations
                     Job = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Department = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -84,6 +84,32 @@ namespace HRProjectBoost.DataAccess.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Allowance",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AllowanceType = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    CurrencyType = table.Column<int>(type: "int", nullable: false),
+                    AllowanceStatus = table.Column<int>(type: "int", nullable: false),
+                    AllowanceCreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AllowanceAnswerTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allowance", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Allowance_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -178,15 +204,34 @@ namespace HRProjectBoost.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "71f14845-0106-4dbd-8b74-cf92ff28759d", "Admin", "ADMIN" },
-                    { 2, "4ba36e68-5b64-4c13-bbb2-f7adadfb20c3", "Manager", "MANAGER" },
-                    { 3, "1a9af3b7-81af-439f-b10e-17699ce52671", "Personnel", "PERSONNEL" }
+                    { 1, "7d6630f6-e7b9-468f-8a73-232a860bd403", "Admin", "ADMIN" },
+                    { 2, "0fc92d33-98b8-4ca5-9ccb-53cbd3990ab5", "Manager", "MANAGER" },
+                    { 3, "aa57ef90-8684-4bdd-b6cb-020ce52937c1", "Personnel", "PERSONNEL" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthCity", "BirthDate", "CompanyInfo", "ConcurrencyStamp", "Department", "Email", "EmailConfirmed", "EndDate", "IdentityNumber", "Job", "LastName", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "Salary", "SecondLastName", "SecondName", "SecurityStamp", "StartDate", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "İstanbul/Maltepe", "Admin", new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5621), "Admin", "93f68e2b-f225-4a6d-8db6-a16c6766f8b5", 2, "admin.admin@bilgeadamboost.com", true, new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5629), "12345678998", "Admin", "Admin", false, null, "Admin", "ADMİN.ADMİN@BİLGEADAMBOOST.COM", "ADMİN", "123456aA-", "AQAAAAEAACcQAAAAEDaXsUYI7mDC4OJ5z4BMwUfOTefsH6vHNyonvTLB/J9gZL/08Jbtn3v99MVlXDWK6A==", "12345678901", true, null, 16500m, "Admin", "Admin", "b38ad386-11a4-4c6a-80f7-cc2355a8c8d2", new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5628), 1, false, "Admin" });
+                values: new object[,]
+                {
+                    { 1, 0, "İstanbul/Maltepe", "Admin", new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3265), "Admin", "b61a43df-788c-4709-9407-db6558044f32", 2, "admin.admin@bilgeadamboost.com", true, new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3272), "12345678998", "Admin", "Admin", false, null, "Admin", "ADMİN.ADMİN@BİLGEADAMBOOST.COM", "ADMİN", "123456aA-", "AQAAAAEAACcQAAAAEPF7ey24j0Fs10/YiGd1C34K/bB277jwXYiKgSAX/1n5SAcg+VPy3DQZev2RDGrPjw==", "12345678901", true, null, 16500m, "Admin", "Admin", "e2fa5389-8e01-4a7f-a56e-44fbcd627176", new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3271), 1, false, "Admin" },
+                    { 2, 0, "İstanbul/Maltepe", "Balıkesir", new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3291), "IT", "01cffcaa-f569-4af5-8066-5d1108327654", 2, "burakayan@bilgeadamboost.com", true, new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3292), "41104925332", "Back End Developer", "Ayan", false, null, "Burak", "BURAKAYAN@BİLGEADAMBOOST.COM", "PERSONEL", "123456aA-", "AQAAAAEAACcQAAAAEMRVM69v/YkAqu2INSn7jPqCQLkCITtntqhi7ZaKnUNtFA68CeUsxOtu1ZRuve5yYA==", "905423985612", true, null, 16500m, "", "", "d382fd62-0216-4ebf-ac06-9c17889d1cea", new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3292), 1, false, "Burak61" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { 3, 2 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Allowance_AppUserId",
+                table: "Allowance",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -230,6 +275,9 @@ namespace HRProjectBoost.DataAccess.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Allowance");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

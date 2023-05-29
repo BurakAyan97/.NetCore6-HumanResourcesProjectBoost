@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRProjectBoost.DataAccess.Migrations
 {
     [DbContext(typeof(HRProjectContext))]
-    [Migration("20230522075046_init")]
-    partial class init
+    [Migration("20230529094717_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,46 @@ namespace HRProjectBoost.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Allowance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("AllowanceAnswerTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("AllowanceCreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("AllowanceStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllowanceType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrencyType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Allowance");
+                });
 
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppRole", b =>
                 {
@@ -57,21 +97,21 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "71f14845-0106-4dbd-8b74-cf92ff28759d",
+                            ConcurrencyStamp = "7d6630f6-e7b9-468f-8a73-232a860bd403",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "4ba36e68-5b64-4c13-bbb2-f7adadfb20c3",
+                            ConcurrencyStamp = "0fc92d33-98b8-4ca5-9ccb-53cbd3990ab5",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "1a9af3b7-81af-439f-b10e-17699ce52671",
+                            ConcurrencyStamp = "aa57ef90-8684-4bdd-b6cb-020ce52937c1",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         });
@@ -167,6 +207,7 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<decimal>("Salary")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecondLastName")
@@ -210,13 +251,13 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Admin",
-                            BirthDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5621),
+                            BirthDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3265),
                             CompanyInfo = "Admin",
-                            ConcurrencyStamp = "93f68e2b-f225-4a6d-8db6-a16c6766f8b5",
+                            ConcurrencyStamp = "b61a43df-788c-4709-9407-db6558044f32",
                             Department = 2,
                             Email = "admin.admin@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5629),
+                            EndDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3272),
                             IdentityNumber = "12345678998",
                             Job = "Admin",
                             LastName = "Admin",
@@ -225,17 +266,50 @@ namespace HRProjectBoost.DataAccess.Migrations
                             NormalizedEmail = "ADMİN.ADMİN@BİLGEADAMBOOST.COM",
                             NormalizedUserName = "ADMİN",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDaXsUYI7mDC4OJ5z4BMwUfOTefsH6vHNyonvTLB/J9gZL/08Jbtn3v99MVlXDWK6A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPF7ey24j0Fs10/YiGd1C34K/bB277jwXYiKgSAX/1n5SAcg+VPy3DQZev2RDGrPjw==",
                             PhoneNumber = "12345678901",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "Admin",
                             SecondName = "Admin",
-                            SecurityStamp = "b38ad386-11a4-4c6a-80f7-cc2355a8c8d2",
-                            StartDate = new DateTime(2023, 5, 22, 10, 50, 46, 181, DateTimeKind.Local).AddTicks(5628),
+                            SecurityStamp = "e2fa5389-8e01-4a7f-a56e-44fbcd627176",
+                            StartDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3271),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Address = "İstanbul/Maltepe",
+                            BirthCity = "Balıkesir",
+                            BirthDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3291),
+                            CompanyInfo = "IT",
+                            ConcurrencyStamp = "01cffcaa-f569-4af5-8066-5d1108327654",
+                            Department = 2,
+                            Email = "burakayan@bilgeadamboost.com",
+                            EmailConfirmed = true,
+                            EndDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3292),
+                            IdentityNumber = "41104925332",
+                            Job = "Back End Developer",
+                            LastName = "Ayan",
+                            LockoutEnabled = false,
+                            Name = "Burak",
+                            NormalizedEmail = "BURAKAYAN@BİLGEADAMBOOST.COM",
+                            NormalizedUserName = "PERSONEL",
+                            Password = "123456aA-",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMRVM69v/YkAqu2INSn7jPqCQLkCITtntqhi7ZaKnUNtFA68CeUsxOtu1ZRuve5yYA==",
+                            PhoneNumber = "905423985612",
+                            PhoneNumberConfirmed = true,
+                            Salary = 16500m,
+                            SecondLastName = "",
+                            SecondName = "",
+                            SecurityStamp = "d382fd62-0216-4ebf-ac06-9c17889d1cea",
+                            StartDate = new DateTime(2023, 5, 29, 12, 47, 17, 309, DateTimeKind.Local).AddTicks(3292),
+                            Status = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "Burak61"
                         });
                 });
 
@@ -321,6 +395,18 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -340,6 +426,17 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Allowance", b =>
+                {
+                    b.HasOne("HRProjectBoost.Entities.Domains.AppUser", "AppUser")
+                        .WithMany("Allowances")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -391,6 +488,11 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppUser", b =>
+                {
+                    b.Navigation("Allowances");
                 });
 #pragma warning restore 612, 618
         }

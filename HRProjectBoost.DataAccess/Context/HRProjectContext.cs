@@ -66,26 +66,26 @@ namespace HRProjectBoost.DataAccess.Context
             AppUser personelSeed = new AppUser()
             {
                 Id = 2,
-                UserName = "Personel",
-                NormalizedUserName = "Personel".ToUpper(),
-                Name = "Personel",
-                SecondName = "Personel",
-                LastName = "Personel",
+                UserName = "Burak61",
+                NormalizedUserName = "Burak61".ToUpper(),
+                Name = "Burak",
+                SecondName = "",
+                LastName = "Ayan",
                 Password = "123456aA-",
-                SecondLastName = "Personel",
+                SecondLastName = "",
                 PhoneNumber = "905423985612",
                 BirthDate = DateTime.Now,
-                BirthCity = "Personel",
+                BirthCity = "Balıkesir",
                 IdentityNumber = "41104925332",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
-                CompanyInfo = "Personel",
-                Job = "Personel",
+                CompanyInfo = "IT",
+                Job = "Back End Developer",
                 Department = Entities.Enums.Department.Engineer,
                 Address = "İstanbul/Maltepe",
                 Salary = 16500,
-                Email = "personel.personel@bilgeadamboost.com",
-                NormalizedEmail = "personel.personel@bilgeadamboost.com".ToUpper(),
+                Email = "burakayan@bilgeadamboost.com",
+                NormalizedEmail = "burakayan@bilgeadamboost.com".ToUpper(),
                 LockoutEnabled = false,
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
@@ -100,7 +100,7 @@ namespace HRProjectBoost.DataAccess.Context
             PasswordHasher<AppUser> passwordHasherPersonel = new PasswordHasher<AppUser>();
             personelSeed.PasswordHash = passwordHasherPersonel.HashPassword(personelSeed, "123456aA-");
 
-            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1 };
+            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1};
             builder.Entity<IdentityUserRole<int>>().HasData(seedManagerRole);
 
             IdentityUserRole<int> seedPersonelRole = new IdentityUserRole<int>() { RoleId = 3, UserId = 2 };

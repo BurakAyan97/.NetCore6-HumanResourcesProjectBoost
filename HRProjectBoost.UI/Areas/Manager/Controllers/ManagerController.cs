@@ -187,7 +187,7 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult GetAllowanceList()
         {
-            List<Allowance> allowanceList = _context.Allowance.Include(x=> x.AppUser).ToList();
+            List<Allowance> allowanceList = _context.Allowance.Include(x => x.AppUser).ToList();
             var dto = _mapper.Map<List<AllowanceDto>>(allowanceList);
             return View(dto);
         }
@@ -228,16 +228,19 @@ namespace HRProjectBoost.UI.Areas.Manager.Controllers
         [Route("Manager/{controller}/{action}/{id?}")]
         public async Task<IActionResult> DeclineAllowance(int id)
         {
+            ViewBag.denied = "Allowance Denied";
             var allowance = await _context.Allowance.FindAsync(id);
             allowance.AllowanceStatus = Entities.Enums.AllowanceStatus.Denied;
             _context.Allowance.Update(allowance);
             await _context.SaveChangesAsync();
-            return RedirectToAction("GetAllowanceList");
+            return RedirectToAction("GetAllowanceList", TempData["denied"]);
         }
 
         [Route("Manager/{controller}/{action}/{id?}")]
         public async Task<IActionResult> AcceptAllowance(int id)
         {
+            ViewBag.access = "Allowance Accepted";
+
             var allowance = await _context.Allowance.FindAsync(id);
             allowance.AllowanceStatus = Entities.Enums.AllowanceStatus.Accepted;
             _context.Allowance.Update(allowance);

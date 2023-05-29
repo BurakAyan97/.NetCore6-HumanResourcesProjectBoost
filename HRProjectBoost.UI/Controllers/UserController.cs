@@ -39,9 +39,11 @@ namespace HRProjectBoost.UI.Controllers
             if (ModelState.IsValid)
             {
                 AppUser appUser = await _userManager.FindByEmailAsync(user.Email);
+                
 
                 if (appUser != null && user.Password == appUser.Password)
                 {
+                    
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
@@ -63,7 +65,7 @@ namespace HRProjectBoost.UI.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");
-                    //ViewBag.NotificationType = "Failed";
+                    TempData["toastr"] = "LoginFailed";
                     //ViewBag.NotificationMessage = "Login failed!";
 
                 }
