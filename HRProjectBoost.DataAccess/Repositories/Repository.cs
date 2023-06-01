@@ -8,5 +8,9 @@ namespace HRProjectBoost.DataAccess.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
+        public Task<T> CreateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

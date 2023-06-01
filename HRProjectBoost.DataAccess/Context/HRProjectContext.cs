@@ -21,11 +21,9 @@ namespace HRProjectBoost.DataAccess.Context
 
         }
 
-        public DbSet<Allowance> Allowance { get; set; }
-        public DbSet<Company> Company { get; set; }
-        public DbSet<Advance> Advance { get; set; }
+        }
 
-        
+        public DbSet<Allowance> Allowance { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region SeedData
@@ -37,7 +35,7 @@ namespace HRProjectBoost.DataAccess.Context
                 );
 
 
-            Company seedCompany = new Company()
+            AppUser user = new AppUser()
             {
                 CompanyId = 1,
                 CompanyName = "TestCompany",
@@ -148,11 +146,7 @@ namespace HRProjectBoost.DataAccess.Context
                 //Company = seedCompany,
             };
 
-
             //seed userin rolu manager olacak EKLENECEK!!
-
-            PasswordHasher<AppUser> passwordHasherAdmin = new PasswordHasher<AppUser>();
-            seedAdmin.PasswordHash = passwordHasherAdmin.HashPassword(seedAdmin, "123456aA-");
 
             PasswordHasher<AppUser> passwordHasherManager = new PasswordHasher<AppUser>();
             seedManager.PasswordHash = passwordHasherManager.HashPassword(seedManager, "123456aA-");

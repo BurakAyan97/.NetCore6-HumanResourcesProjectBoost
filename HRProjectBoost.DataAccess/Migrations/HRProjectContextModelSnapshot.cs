@@ -289,6 +289,7 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
 
                     b.HasData(
                         new
@@ -326,7 +327,7 @@ namespace HRProjectBoost.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 2,
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Balıkesir",
@@ -344,7 +345,7 @@ namespace HRProjectBoost.DataAccess.Migrations
                             LockoutEnabled = false,
                             Name = "Burak",
                             NormalizedEmail = "BURAKAYAN@BİLGEADAMBOOST.COM",
-                            NormalizedUserName = "BURAK61",
+                            NormalizedUserName = "PERSONEL",
                             Password = "123456aA-",
                             PasswordHash = "AQAAAAEAACcQAAAAEMYzxXn2Wtl4iMDUmaiyVleZTborBh3xee+AwH2elBHtUYlbvzgjXml9wgsWeD943w==",
                             PhoneNumber = "905423985612",
@@ -595,17 +596,6 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Advance", b =>
-                {
-                    b.HasOne("HRProjectBoost.Entities.Domains.AppUser", "AppUser")
-                        .WithMany("Advances")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.Allowance", b =>
                 {
                     b.HasOne("HRProjectBoost.Entities.Domains.AppUser", "AppUser")
@@ -615,15 +605,6 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppUser", b =>
-                {
-                    b.HasOne("HRProjectBoost.Entities.Domains.Company", "Company")
-                        .WithMany("AppUser")
-                        .HasForeignKey("CompanyId");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -682,11 +663,6 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.Navigation("Advances");
 
                     b.Navigation("Allowances");
-                });
-
-            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Company", b =>
-                {
-                    b.Navigation("AppUser");
                 });
 #pragma warning restore 612, 618
         }
