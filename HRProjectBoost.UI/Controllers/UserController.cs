@@ -50,14 +50,18 @@ namespace HRProjectBoost.UI.Controllers
                     {
                         var personnelUser = await _userManager.IsInRoleAsync(appUser, "Personnel");
                         var managerUser = await _userManager.IsInRoleAsync(appUser, "Manager");
+                        var adminUser = await _userManager.IsInRoleAsync(appUser, "Admin");
+
 
                         //ViewBag.NotificationType = "Succes";
                         //ViewBag.NotificationMessage = "Login succeed!";
 
                         if (personnelUser)
-                            return RedirectToAction("ChangePassword");
+                            return RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" });
                         else if (managerUser)
                             return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                        else if (adminUser)
+                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
                     }
 
                     //Admin rolü gelirse burası değişebilir.

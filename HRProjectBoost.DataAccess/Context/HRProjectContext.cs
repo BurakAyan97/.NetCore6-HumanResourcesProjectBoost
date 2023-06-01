@@ -1,4 +1,5 @@
-﻿using HRProjectBoost.Entities.Domains;
+﻿using HRProjectBoost.DataAccess.Configurations;
+using HRProjectBoost.Entities.Domains;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +20,16 @@ namespace HRProjectBoost.DataAccess.Context
         {
 
         }
-        public HRProjectContext()
-        {
-
-        }
 
         public DbSet<Allowance> Allowance { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Advance> Advance { get; set; }
+
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            #region SeedData
+
             builder.Entity<AppRole>().HasData(
                 new AppRole() { Id = 1, Name = "Admin", NormalizedName = "ADMIN", },
                 new AppRole() { Id = 2, Name = "Manager", NormalizedName = "MANAGER", },
@@ -34,7 +37,25 @@ namespace HRProjectBoost.DataAccess.Context
                 );
 
 
-            AppUser user = new AppUser()
+            Company seedCompany = new Company()
+            {
+                CompanyId = 1,
+                CompanyName = "TestCompany",
+                CompanyTitle = "TC",
+                MersisNo = "123456",
+                TaxNo = "123456",
+                TaxAdministration = "DenemeVergiDairesi",
+                CompanyPhoneNumber = "+9050012312312",
+                CompanyAddress = "Adress Deneme",
+                CompanyEmail = "test.company@test.com",
+                EstablishDate = DateTime.Now.AddYears(-2),
+                AgreementStartDate = DateTime.Now,
+                AgreementEndDate = DateTime.Now.AddYears(2),
+                CompanyStatus = Entities.Enums.CompanyStatus.Active,
+            };
+
+
+            AppUser seedAdmin = new AppUser()
             {
                 Id = 1,
                 UserName = "Admin",
@@ -61,11 +82,44 @@ namespace HRProjectBoost.DataAccess.Context
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
+
             };
 
-            AppUser personelSeed = new AppUser()
+            AppUser seedManager = new AppUser()
             {
                 Id = 2,
+                UserName = "Manager",
+                NormalizedUserName = "Manager".ToUpper(),
+                Name = "Manager",
+                SecondName = "Manager",
+                LastName = "Manager",
+                Password = "123456aA-",
+                SecondLastName = "Manager",
+                PhoneNumber = "12345678901",
+                BirthDate = DateTime.Now,
+                BirthCity = "Manager",
+                IdentityNumber = "12345678998",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                CompanyInfo = "Manager",
+                Job = "Manager",
+                Department = Entities.Enums.Department.Engineer,
+                Address = "İstanbul/Maltepe",
+                Salary = 16500,
+                Email = "manager.manager@bilgeadamboost.com",
+                NormalizedEmail = "manager.manager@bilgeadamboost.com".ToUpper(),
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = true,
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                CompanyId = 1,
+                //Company = seedCompany,
+            };
+
+
+            AppUser seedPersonel = new AppUser()
+            {
+                Id = 3,
                 UserName = "Burak61",
                 NormalizedUserName = "Burak61".ToUpper(),
                 Name = "Burak",
@@ -90,25 +144,40 @@ namespace HRProjectBoost.DataAccess.Context
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
+                CompanyId = 1,
+                //Company = seedCompany,
             };
+
 
             //seed userin rolu manager olacak EKLENECEK!!
 
+            PasswordHasher<AppUser> passwordHasherAdmin = new PasswordHasher<AppUser>();
+            seedAdmin.PasswordHash = passwordHasherAdmin.HashPassword(seedAdmin, "123456aA-");
+
             PasswordHasher<AppUser> passwordHasherManager = new PasswordHasher<AppUser>();
-            user.PasswordHash = passwordHasherManager.HashPassword(user, "123456aA-");
+            seedManager.PasswordHash = passwordHasherManager.HashPassword(seedManager, "123456aA-");
 
             PasswordHasher<AppUser> passwordHasherPersonel = new PasswordHasher<AppUser>();
-            personelSeed.PasswordHash = passwordHasherPersonel.HashPassword(personelSeed, "123456aA-");
+            seedPersonel.PasswordHash = passwordHasherPersonel.HashPassword(seedPersonel, "123456aA-");
 
-            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1};
+            IdentityUserRole<int> seedAdminRole = new IdentityUserRole<int>() { RoleId = 1, UserId = 1};
+            builder.Entity<IdentityUserRole<int>>().HasData(seedAdminRole);
+
+            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 2 };
             builder.Entity<IdentityUserRole<int>>().HasData(seedManagerRole);
 
-            IdentityUserRole<int> seedPersonelRole = new IdentityUserRole<int>() { RoleId = 3, UserId = 2 };
+            IdentityUserRole<int> seedPersonelRole = new IdentityUserRole<int>() { RoleId = 3, UserId = 3 };
             builder.Entity<IdentityUserRole<int>>().HasData(seedPersonelRole);
 
-            builder.Entity<AppUser>().HasData(user);
-            builder.Entity<AppUser>().HasData(personelSeed);
 
+
+            builder.Entity<Company>().HasData(seedCompany);
+            builder.Entity<AppUser>().HasData(seedAdmin);
+            builder.Entity<AppUser>().HasData(seedPersonel);
+            builder.Entity<AppUser>().HasData(seedManager);
+
+
+            #endregion
 
             var decimalProps = builder.Model
             .GetEntityTypes()

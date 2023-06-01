@@ -24,9 +24,8 @@ namespace HRProjectBoost.DataAccess.Extensions
                 opt.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<HRProjectContext>();
 
-
-
             return services;
+
         }
     }
 }

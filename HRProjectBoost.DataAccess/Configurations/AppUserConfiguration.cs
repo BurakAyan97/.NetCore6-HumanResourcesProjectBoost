@@ -9,14 +9,11 @@ using System.Threading.Tasks;
 
 namespace HRProjectBoost.DataAccess.Configurations
 {
-    public class AllowanceConfiguration : IEntityTypeConfiguration<Allowance>
-
+    public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<Allowance> builder)
+        public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder.HasKey(x=> x.AllowanceId);
-
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Allowances).HasForeignKey(x=> x.AppUserId);
+            builder.HasOne(x => x.Company).WithMany(x => x.AppUser).HasForeignKey(x => x.CompanyId);
         }
     }
 }

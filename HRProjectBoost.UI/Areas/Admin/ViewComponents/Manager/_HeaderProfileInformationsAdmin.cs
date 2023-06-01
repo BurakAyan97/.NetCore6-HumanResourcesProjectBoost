@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace HRProjectBoost.UI.ViewComponents.Manager
+namespace HRProjectBoost.UI.Areas.ViewComponents.Admin
+
 {
-    public class _HeaderProfileInformations: ViewComponent
+    public class _HeaderProfileInformationsAdmin : ViewComponent
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IMapper _mapper;
 
-        public _HeaderProfileInformations(UserManager<AppUser> userManager, IMapper mapper)
+        public _HeaderProfileInformationsAdmin(UserManager<AppUser> userManager, IMapper mapper)
         {
             this.userManager = userManager;
             _mapper = mapper;

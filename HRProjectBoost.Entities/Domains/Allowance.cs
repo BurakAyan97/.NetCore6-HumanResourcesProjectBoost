@@ -10,7 +10,7 @@ namespace HRProjectBoost.Entities.Domains
 {
     public class Allowance
     {
-        public int Id { get; set; }
+        public int AllowanceId { get; set; }
         public AllowanceType AllowanceType { get; set; }
         public int Total { get; set; }
         public CurrencyType CurrencyType { get; set; }

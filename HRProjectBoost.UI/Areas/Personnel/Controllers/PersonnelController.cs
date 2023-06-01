@@ -121,7 +121,7 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
                 allowance.Total = allowanceCreateDto.Total;
                 AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
                 allowance.AppUserId = user.Id;
-                allowance.Path = path.Substring(path.Length -40);
+                allowance.Path = path.Substring(path.Length - 40);
 
                 _context.Allowance.Add(allowance);
                 await _context.SaveChangesAsync();
@@ -129,6 +129,44 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
             return View(allowanceCreateDto);
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(PersonnelChangePasswordDto changePasswordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(changePasswordDto);
+            }
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user is not null)
+            {
+                var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    user.Password = changePasswordDto.NewPassword;
+                    await _userManager.UpdateAsync(user);
+                    return RedirectToAction("Logout","User", new { area = "" });
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            else
+                ModelState.AddModelError("", "User cannot be found");
+
+            return RedirectToAction("Logout", "User");
+        }
 
     }
 }
