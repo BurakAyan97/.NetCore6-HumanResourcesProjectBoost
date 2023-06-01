@@ -9,6 +9,6 @@ namespace HRProjectBoost.DataAccess.Repositories
 {
     public interface IRepository<T> where T : class,new()
     {
-        
+        Task<T> CreateAsync(T entity);
     }
 }

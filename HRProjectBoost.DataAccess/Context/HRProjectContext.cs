@@ -1,4 +1,5 @@
-﻿using HRProjectBoost.Entities.Domains;
+﻿using HRProjectBoost.DataAccess.Configurations;
+using HRProjectBoost.Entities.Domains;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,9 @@ namespace HRProjectBoost.DataAccess.Context
 
         }
 
+        public DbSet<Advance> Advances { get; set; }
         public DbSet<Allowance> Allowance { get; set; }
+        public DbSet<Company> Companies { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AppRole>().HasData(
@@ -32,7 +35,6 @@ namespace HRProjectBoost.DataAccess.Context
                 new AppRole() { Id = 2, Name = "Manager", NormalizedName = "MANAGER", },
                 new AppRole() { Id = 3, Name = "Personnel", NormalizedName = "PERSONNEL", }
                 );
-
 
             AppUser user = new AppUser()
             {
@@ -92,24 +94,19 @@ namespace HRProjectBoost.DataAccess.Context
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
 
-            //seed userin rolu manager olacak EKLENECEK!!
-
             PasswordHasher<AppUser> passwordHasherManager = new PasswordHasher<AppUser>();
             user.PasswordHash = passwordHasherManager.HashPassword(user, "123456aA-");
 
             PasswordHasher<AppUser> passwordHasherPersonel = new PasswordHasher<AppUser>();
             personelSeed.PasswordHash = passwordHasherPersonel.HashPassword(personelSeed, "123456aA-");
 
-            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1};
+            IdentityUserRole<int> seedManagerRole = new IdentityUserRole<int>() { RoleId = 2, UserId = 1 };
             builder.Entity<IdentityUserRole<int>>().HasData(seedManagerRole);
 
             IdentityUserRole<int> seedPersonelRole = new IdentityUserRole<int>() { RoleId = 3, UserId = 2 };
             builder.Entity<IdentityUserRole<int>>().HasData(seedPersonelRole);
 
-            builder.Entity<AppUser>().HasData(user);
-            builder.Entity<AppUser>().HasData(personelSeed);
-
-
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             var decimalProps = builder.Model
             .GetEntityTypes()
             .SelectMany(t => t.GetProperties())

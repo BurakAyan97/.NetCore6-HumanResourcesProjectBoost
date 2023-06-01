@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRProjectBoost.DataAccess.UnitOfWork
+namespace HRProjectBoost.Entities.Enums
 {
-    public interface IUnitOfWork
+    public enum CompanyStatus
     {
+        Active = 1,
+        Inactive = 2
     }
 }

@@ -22,6 +22,40 @@ namespace HRProjectBoost.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Advance", b =>
+                {
+                    b.Property<int>("AdvanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdvanceId"), 1L, 1);
+
+                    b.Property<int>("AdvanceStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AdvanceType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrencyType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdvanceId");
+
+                    b.HasIndex("AppUserID");
+
+                    b.ToTable("Advances");
+                });
+
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.Allowance", b =>
                 {
                     b.Property<int>("Id")
@@ -95,21 +129,21 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "8dcbb959-acb1-4f05-a00f-168919f8e08f",
+                            ConcurrencyStamp = "446176d1-2ea5-4ead-ac0a-c6f8948bf92d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "5aea7124-c26c-4b8c-bca7-0501f47d3a14",
+                            ConcurrencyStamp = "1bc79627-4f82-4183-8bc5-46b7b9f22049",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "c1c038d7-a711-4adf-b802-38aec195ac7b",
+                            ConcurrencyStamp = "00538063-0196-4ab7-8346-3418ded3cd80",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         });
@@ -136,6 +170,9 @@ namespace HRProjectBoost.DataAccess.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CompanyInfo")
                         .IsRequired()
@@ -232,6 +269,8 @@ namespace HRProjectBoost.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -241,74 +280,69 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            Address = "İstanbul/Maltepe",
-                            BirthCity = "Admin",
-                            BirthDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5541),
-                            CompanyInfo = "Admin",
-                            ConcurrencyStamp = "adda88cf-59d9-4b8d-a673-d9e3895b515a",
-                            Department = 2,
-                            Email = "admin.admin@bilgeadamboost.com",
-                            EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5549),
-                            IdentityNumber = "12345678998",
-                            Job = "Admin",
-                            LastName = "Admin",
-                            LockoutEnabled = false,
-                            Name = "Admin",
-                            NormalizedEmail = "ADMİN.ADMİN@BİLGEADAMBOOST.COM",
-                            NormalizedUserName = "ADMİN",
-                            Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGl4+G10N2ZWQIWRsyoxvFoxje+wnYHXQAT9t6s23CYQ3tBg36xKhZ2gntIjRUiQ5A==",
-                            PhoneNumber = "12345678901",
-                            PhoneNumberConfirmed = true,
-                            Salary = 16500m,
-                            SecondLastName = "Admin",
-                            SecondName = "Admin",
-                            SecurityStamp = "949c2ef9-3012-4cd7-8191-dbf2b3b63411",
-                            StartDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5549),
-                            Status = 1,
-                            TwoFactorEnabled = false,
-                            UserName = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            Address = "İstanbul/Maltepe",
-                            BirthCity = "Balıkesir",
-                            BirthDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5571),
-                            CompanyInfo = "IT",
-                            ConcurrencyStamp = "f054e9bd-8d67-4468-97c1-88cade3d33f4",
-                            Department = 2,
-                            Email = "burakayan@bilgeadamboost.com",
-                            EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5573),
-                            IdentityNumber = "41104925332",
-                            Job = "Back End Developer",
-                            LastName = "Ayan",
-                            LockoutEnabled = false,
-                            Name = "Burak",
-                            NormalizedEmail = "BURAKAYAN@BİLGEADAMBOOST.COM",
-                            NormalizedUserName = "PERSONEL",
-                            Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO/vz6VQEWCRcCJLTUhWQHenwoOWH3/0btm4wbodjHa2z9J2vTP9jlnlAPfoJMMfZA==",
-                            PhoneNumber = "905423985612",
-                            PhoneNumberConfirmed = true,
-                            Salary = 16500m,
-                            SecondLastName = "",
-                            SecondName = "",
-                            SecurityStamp = "7b23b8e9-43db-4946-9f55-689429694360",
-                            StartDate = new DateTime(2023, 5, 29, 13, 3, 31, 35, DateTimeKind.Local).AddTicks(5572),
-                            Status = 1,
-                            TwoFactorEnabled = false,
-                            UserName = "Burak61"
-                        });
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Company", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"), 1L, 1);
+
+                    b.Property<DateTime?>("AgreementEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("AgreementStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CompanyAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EstablishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Logo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("MersisNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonnelCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaxAdministration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaxNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CompanyId");
+
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -426,6 +460,17 @@ namespace HRProjectBoost.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Advance", b =>
+                {
+                    b.HasOne("HRProjectBoost.Entities.Domains.AppUser", "AppUserPersonnel")
+                        .WithMany("Advances")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUserPersonnel");
+                });
+
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.Allowance", b =>
                 {
                     b.HasOne("HRProjectBoost.Entities.Domains.AppUser", "AppUser")
@@ -435,6 +480,15 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppUser", b =>
+                {
+                    b.HasOne("HRProjectBoost.Entities.Domains.Company", "Company")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -490,7 +544,14 @@ namespace HRProjectBoost.DataAccess.Migrations
 
             modelBuilder.Entity("HRProjectBoost.Entities.Domains.AppUser", b =>
                 {
+                    b.Navigation("Advances");
+
                     b.Navigation("Allowances");
+                });
+
+            modelBuilder.Entity("HRProjectBoost.Entities.Domains.Company", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 #pragma warning restore 612, 618
         }

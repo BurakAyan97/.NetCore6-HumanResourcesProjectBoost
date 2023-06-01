@@ -1,5 +1,6 @@
 ﻿using HRProjectBoost.Entities.Enums;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HRProjectBoost.Entities.Domains
 {
@@ -24,7 +25,11 @@ namespace HRProjectBoost.Entities.Domains
         public byte[]? ProfilePicture { get; set; }
 
         //Nav Props
-        public virtual ICollection<Allowance>? Allowances { get; set; }
+        public  ICollection<Allowance>? Allowances { get; set; }
+        public  ICollection<Advance>? Advances { get; set; }
+
+        public int? CompanyId { get; set; }
+        public  Company? Company { get; set; }
 
     }
 }
