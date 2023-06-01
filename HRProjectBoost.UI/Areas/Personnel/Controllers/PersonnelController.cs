@@ -1,12 +1,15 @@
 using AutoMapper;
 using HRProjectBoost.Business.FluentValidations;
 using HRProjectBoost.DataAccess.Context;
+using HRProjectBoost.DTOs.DTOs.Advance;
 using HRProjectBoost.DTOs.DTOs.Allowance;
 using HRProjectBoost.DTOs.DTOs.Personnel;
 using HRProjectBoost.Entities.Domains;
+using HRProjectBoost.Entities.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRProjectBoost.UI.Areas.Personnel.Controllers
 {
@@ -152,7 +155,7 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
                 {
                     user.Password = changePasswordDto.NewPassword;
                     await _userManager.UpdateAsync(user);
-                    return RedirectToAction("Logout","User", new { area = "" });
+                    return RedirectToAction("Logout", "User", new { area = "" });
                 }
                 else
                 {
@@ -166,6 +169,60 @@ namespace HRProjectBoost.UI.Areas.Personnel.Controllers
                 ModelState.AddModelError("", "User cannot be found");
 
             return RedirectToAction("Logout", "User");
+        }
+
+        [HttpGet]
+        public IActionResult CreateAdvance()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAdvance(AdvanceCreateDto advanceCreateDto)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            user.Salary = advanceCreateDto.Salary;
+            if (ModelState.IsValid)
+            {
+                Advance advance = new()
+                {
+                    AdvanceType = advanceCreateDto.AdvanceType,
+                    AdvanceStatus = advanceCreateDto.AdvanceStatus,
+                    CurrencyType = advanceCreateDto.CurrencyType,
+                    Description = advanceCreateDto.Description,
+                    Total = advanceCreateDto.Total,
+                    Status = advanceCreateDto.Status,
+                    AppUser = user,
+                    AppUserId = user.Id,
+                    AdvanceCreatedTime = DateTime.Parse(DateTime.UtcNow.ToString("d")),
+                    AdvanceAnsweredTime = DateTime.Parse(DateTime.UtcNow.ToString("d"))
+                };
+
+                if (advanceCreateDto.AdvanceType == AdvanceType.Individiual && advanceCreateDto.Total > user.Salary * 3)
+                    ModelState.AddModelError("", "The total cannot be more than 3 times your salary ");
+                else if (advanceCreateDto.CurrencyType == CurrencyType.USD && advanceCreateDto.Total > 5000)
+                    ModelState.AddModelError("", "The total cannot be more than 5000 USD ");
+                else if (advanceCreateDto.CurrencyType == CurrencyType.EUR && advanceCreateDto.Total > 5000)
+                    ModelState.AddModelError("", "The total cannot be more than 5000 EUR ");
+                else
+                {
+                    await _context.Advance.AddAsync(advance);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("AdvanceList");
+                }
+            }
+            else
+                ModelState.AddModelError("", "Error");
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AdvanceList(AdvanceDto advanceDto)
+        {
+            List<Advance> advanceList = _context.Advance.Include(x => x.AppUser).ToList();
+            var dto = _mapper.Map<List<AdvanceDto>>(advanceList);
+            return View(dto);
         }
 
     }

@@ -4,6 +4,7 @@ using HRProjectBoost.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRProjectBoost.DataAccess.Migrations
 {
     [DbContext(typeof(HRProjectContext))]
-    partial class HRProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20230601111224_init3")]
+    partial class init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,12 +31,6 @@ namespace HRProjectBoost.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdvanceId"), 1L, 1);
-
-                    b.Property<DateTime>("AdvanceAnsweredTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("AdvanceCreatedTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("AdvanceStatus")
                         .HasColumnType("int");
@@ -138,21 +134,21 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "aa0b8b87-f2cd-4473-ba7d-a9a85ee79a1d",
+                            ConcurrencyStamp = "8867fd84-363c-4f15-8181-b64248fb4405",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "b07f5c9a-d77d-4e53-ad59-f7c50c2ed6ee",
+                            ConcurrencyStamp = "21070a57-214a-437c-a8d7-2bd029327830",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "cb2b547e-75d7-48d8-b0d8-50376db479c4",
+                            ConcurrencyStamp = "b38d3360-10c9-4a85-a9f2-d60d055a8f23",
                             Name = "Personnel",
                             NormalizedName = "PERSONNEL"
                         });
@@ -297,13 +293,13 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Admin",
-                            BirthDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5882),
+                            BirthDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2362),
                             CompanyInfo = "Admin",
-                            ConcurrencyStamp = "5f08239e-fec3-48a1-b94c-451244f5d4bd",
+                            ConcurrencyStamp = "d88837e7-ca60-4e6d-a01e-14e8597c89a9",
                             Department = 2,
                             Email = "admin.admin@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5884),
+                            EndDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2364),
                             IdentityNumber = "12345678998",
                             Job = "Admin",
                             LastName = "Admin",
@@ -312,14 +308,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             NormalizedEmail = "ADMİN.ADMİN@BİLGEADAMBOOST.COM",
                             NormalizedUserName = "ADMİN",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAECL+RXw+9T7TlE/AI69PeAwTcIGFp+wCgZvBNLnzF7ZP6cAAyP/CKEivK9HdlXeBvg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPBY/PseoGemowfoStiBKQdq3F5zvTcgIue+LCH/ToIMDYm23e9mZZDRznn05v6Ccg==",
                             PhoneNumber = "12345678901",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "Admin",
                             SecondName = "Admin",
-                            SecurityStamp = "7246537d-3dbf-4052-93a9-5afc94e6a928",
-                            StartDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5883),
+                            SecurityStamp = "66c911ed-5d7d-4293-93d3-87c2cf94cec4",
+                            StartDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2363),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -330,14 +326,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Balıkesir",
-                            BirthDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5949),
+                            BirthDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2410),
                             CompanyId = 1,
                             CompanyInfo = "IT",
-                            ConcurrencyStamp = "131ea33c-8829-4e2a-ab9f-3fba3b2a2b8f",
+                            ConcurrencyStamp = "ce7e2f9f-75b3-4b2c-a0af-cfaff20e1f65",
                             Department = 2,
                             Email = "burakayan@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5950),
+                            EndDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2411),
                             IdentityNumber = "41104925332",
                             Job = "Back End Developer",
                             LastName = "Ayan",
@@ -346,14 +342,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             NormalizedEmail = "BURAKAYAN@BİLGEADAMBOOST.COM",
                             NormalizedUserName = "BURAK61",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMYzxXn2Wtl4iMDUmaiyVleZTborBh3xee+AwH2elBHtUYlbvzgjXml9wgsWeD943w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHpunQ6fauygKpFQY4xlV5XAxg7kIdGBqXlCTQiIpcVCk9l4WfZReoJIy9RAopd57g==",
                             PhoneNumber = "905423985612",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "",
                             SecondName = "",
-                            SecurityStamp = "64ce57c7-e5d6-4e65-94dc-08188aa64520",
-                            StartDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5950),
+                            SecurityStamp = "948d2251-e5ba-4d7c-bf21-cce598eb43a7",
+                            StartDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2411),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Burak61"
@@ -364,14 +360,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             AccessFailedCount = 0,
                             Address = "İstanbul/Maltepe",
                             BirthCity = "Manager",
-                            BirthDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5906),
+                            BirthDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2397),
                             CompanyId = 1,
                             CompanyInfo = "Manager",
-                            ConcurrencyStamp = "42ec1bdb-b496-4ffa-ac4f-0ce699700974",
+                            ConcurrencyStamp = "4bc49158-a395-4409-9278-3e4e98749d7c",
                             Department = 2,
                             Email = "manager.manager@bilgeadamboost.com",
                             EmailConfirmed = true,
-                            EndDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5907),
+                            EndDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2398),
                             IdentityNumber = "12345678998",
                             Job = "Manager",
                             LastName = "Manager",
@@ -380,14 +376,14 @@ namespace HRProjectBoost.DataAccess.Migrations
                             NormalizedEmail = "MANAGER.MANAGER@BİLGEADAMBOOST.COM",
                             NormalizedUserName = "MANAGER",
                             Password = "123456aA-",
-                            PasswordHash = "AQAAAAEAACcQAAAAED6E5nWkMA9yhsKSGXvpN/0BJo0TAEvTPjfjEXAlVcMQDTkPEpCU9gIaFJdcWcbMGg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHT3fNJH3tRG/R0emsjiG5m8Ze047p1iw/tueNcCWUN5gjmPdFgnCuQ6x7/3WDDnwQ==",
                             PhoneNumber = "12345678901",
                             PhoneNumberConfirmed = true,
                             Salary = 16500m,
                             SecondLastName = "Manager",
                             SecondName = "Manager",
-                            SecurityStamp = "2724621e-d820-47f3-b885-5db82e49401e",
-                            StartDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5906),
+                            SecurityStamp = "63831aa9-8dd7-4c4e-acd4-05f0bb457eda",
+                            StartDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2397),
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "Manager"
@@ -460,15 +456,15 @@ namespace HRProjectBoost.DataAccess.Migrations
                         new
                         {
                             CompanyId = 1,
-                            AgreementEndDate = new DateTime(2025, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5841),
-                            AgreementStartDate = new DateTime(2023, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5840),
+                            AgreementEndDate = new DateTime(2025, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2326),
+                            AgreementStartDate = new DateTime(2023, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2325),
                             CompanyAddress = "Adress Deneme",
                             CompanyEmail = "test.company@test.com",
                             CompanyName = "TestCompany",
                             CompanyPhoneNumber = "+9050012312312",
                             CompanyStatus = 1,
                             CompanyTitle = "TC",
-                            EstablishDate = new DateTime(2021, 6, 1, 15, 17, 0, 609, DateTimeKind.Local).AddTicks(5832),
+                            EstablishDate = new DateTime(2021, 6, 1, 14, 12, 24, 333, DateTimeKind.Local).AddTicks(2313),
                             MersisNo = "123456",
                             TaxAdministration = "DenemeVergiDairesi",
                             TaxNo = "123456"
