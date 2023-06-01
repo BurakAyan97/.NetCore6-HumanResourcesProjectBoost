@@ -10,10 +10,6 @@ namespace HRProjectBoost.UI.Controllers
     [AllowAnonymous]
     public class UserController : Controller
     {
-
-
-
-
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -34,16 +30,12 @@ namespace HRProjectBoost.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto user)
         {
-
-
             if (ModelState.IsValid)
             {
                 AppUser appUser = await _userManager.FindByEmailAsync(user.Email);
-                
 
                 if (appUser != null && user.Password == appUser.Password)
                 {
-                    
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
@@ -71,7 +63,6 @@ namespace HRProjectBoost.UI.Controllers
                     ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");
                     TempData["toastr"] = "LoginFailed";
                     //ViewBag.NotificationMessage = "Login failed!";
-
                 }
 
                 return View(user);
