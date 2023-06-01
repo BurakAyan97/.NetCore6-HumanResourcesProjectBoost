@@ -10,10 +10,6 @@ namespace HRProjectBoost.UI.Controllers
     [AllowAnonymous]
     public class UserController : Controller
     {
-
-
-
-
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -34,30 +30,30 @@ namespace HRProjectBoost.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto user)
         {
-
-
             if (ModelState.IsValid)
             {
                 AppUser appUser = await _userManager.FindByEmailAsync(user.Email);
-                
 
                 if (appUser != null && user.Password == appUser.Password)
                 {
-                    
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(appUser.UserName, appUser.Password, false, lockoutOnFailure: false);
 
                     if (result.Succeeded)
                     {
                         var personnelUser = await _userManager.IsInRoleAsync(appUser, "Personnel");
                         var managerUser = await _userManager.IsInRoleAsync(appUser, "Manager");
+                        var adminUser = await _userManager.IsInRoleAsync(appUser, "Admin");
+
 
                         //ViewBag.NotificationType = "Succes";
                         //ViewBag.NotificationMessage = "Login succeed!";
 
                         if (personnelUser)
-                            return RedirectToAction("ChangePassword");
+                            return RedirectToAction("ChangePassword", "Personnel", new { area = "Personnel" });
                         else if (managerUser)
                             return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                        else if (adminUser)
+                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
                     }
 
                     //Admin rolü gelirse burası değişebilir.
@@ -67,7 +63,6 @@ namespace HRProjectBoost.UI.Controllers
                     ModelState.AddModelError("", "Yanlış Kullanıcı Adı/Şifre.");
                     TempData["toastr"] = "LoginFailed";
                     //ViewBag.NotificationMessage = "Login failed!";
-
                 }
 
                 return View(user);

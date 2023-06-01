@@ -16,6 +16,8 @@ namespace HRProjectBoost.Entities.Domains
         public CurrencyType CurrencyType { get; set; }
         public Status AdvanceStatus{ get; set; }
 
+
+
         //Nav Props
         public  AppUser AppUserPersonnel { get; set; }
         public int AppUserID { get; set; }

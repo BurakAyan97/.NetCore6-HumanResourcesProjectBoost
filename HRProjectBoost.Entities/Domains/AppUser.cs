@@ -16,7 +16,7 @@ namespace HRProjectBoost.Entities.Domains
         public string IdentityNumber { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public string CompanyInfo { get; set; }
+        public string CompanyInfo { get; set; } // bunu kaldirabiliriz.
         public string Job { get; set; }
         public Department Department { get; set; }
         public string Address { get; set; }
@@ -25,11 +25,12 @@ namespace HRProjectBoost.Entities.Domains
         public byte[]? ProfilePicture { get; set; }
 
         //Nav Props
-        public  ICollection<Allowance>? Allowances { get; set; }
-        public  ICollection<Advance>? Advances { get; set; }
+        public virtual ICollection<Allowance>? Allowances { get; set; }
+        public virtual ICollection<Advance>? Advances { get; set; }
 
         public int? CompanyId { get; set; }
-        public  Company? Company { get; set; }
+        public Company? Company { get; set; }
+
 
     }
 }
