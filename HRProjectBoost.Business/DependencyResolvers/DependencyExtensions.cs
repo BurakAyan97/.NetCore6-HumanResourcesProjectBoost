@@ -23,7 +23,11 @@ namespace HRProjectBoost.Business.DependencyResolvers
                 opt.AddProfile(new PersonnelProfile());
                 opt.AddProfile(new AuthenticationProfile());
                 opt.AddProfile(new AllowanceProfile());
+<<<<<<< HEAD
                 opt.AddProfile(new AdminProfile());
+=======
+                opt.AddProfile(new AdvanceProfile());
+>>>>>>> a26c394a885546fbe97de44cf20799d9d4b69266
             });
 
 

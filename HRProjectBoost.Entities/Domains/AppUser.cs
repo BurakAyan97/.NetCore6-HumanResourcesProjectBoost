@@ -1,5 +1,6 @@
 ﻿using HRProjectBoost.Entities.Enums;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HRProjectBoost.Entities.Domains
 {

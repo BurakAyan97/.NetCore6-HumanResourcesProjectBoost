@@ -13,7 +13,8 @@ namespace HRProjectBoost.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder.HasOne(x => x.Company).WithMany(x => x.AppUser).HasForeignKey(x => x.CompanyId);
+            builder.HasMany(x => x.Allowances).WithOne(x => x.AppUser).HasForeignKey(x => x.AppUserId);
+            builder.HasMany(x => x.Advances).WithOne(x => x.AppUserPersonnel).HasForeignKey(x => x.AppUserID);
         }
     }
 }
